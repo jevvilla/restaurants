@@ -25,6 +25,7 @@ Then go to the project root (project folder), and run the following commands to 
 
 - `git checkout dev` to be placed in the correct branch.
 - `npm install` - Install project dependencies.
+- NOTE: don't forget install the Pod, from the root path run `cd ios && pod install`.
 - `react-native run-ios` - Run the app locally.  By default this will run an iPhone X simulator.
 - `react-native run-android` - install to the single Android device connected (if more than one are connected, you must specify the device with `—deviceId` which can be gotten from `adb devices`).
 
