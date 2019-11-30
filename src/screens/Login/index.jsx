@@ -12,8 +12,8 @@ import styles from './styles';
 
 const Login = props => {
   const [credentials, setCredentials] = useState({
-    email: null,
-    password: null,
+    email: 'pedro.email.com',
+    password: '0000',
   });
   const [loginError, setLoginError] = useState(false);
 
@@ -55,12 +55,14 @@ const Login = props => {
       <TextInput
         style={styles.input}
         placeholder={strings.EMAIL_PLACEHOLDER}
+        value={credentials.email}
         onChangeText={value => onChangeTextInputHandler('email', value)}
       />
       <TextInput
         style={styles.input}
         placeholder={strings.PASSWORD_PLACEHOLDER}
         secureTextEntry
+        value={credentials.password}
         onChangeText={value => onChangeTextInputHandler('password', value)}
       />
 
