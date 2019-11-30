@@ -1,10 +1,7 @@
 import React from 'react';
-import { View, Text } from 'react-native';
 
-const App = () => (
-  <View>
-    <Text>Tyba</Text>
-  </View>
-);
+import Router from './common/navigation';
+
+const App = () => <Router />;
 
 export default App;
