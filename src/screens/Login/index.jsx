@@ -80,7 +80,7 @@ Login.propTypes = {
     getUserByEmailAndPassword: PropTypes.func.isRequired,
   }).isRequired,
   users: PropTypes.shape({
-    userLogged: PropTypes.shape({}).isRequired,
+    userLogged: PropTypes.shape({}),
   }).isRequired,
 };
 
