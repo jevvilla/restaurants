@@ -1,17 +1,17 @@
-import { createAppContainer } from 'react-navigation';
-import { createStackNavigator } from 'react-navigation-stack';
+import { createAppContainer, createSwitchNavigator } from 'react-navigation';
 
-import { Home, History } from '../../screens';
-
+import LoginStack from './loginStack';
+import AppStack from './appStack';
 import * as routes from './routes';
 
-const Navigator = createStackNavigator({
-  [routes.HOME]: {
-    screen: Home,
+const switchNavigator = createSwitchNavigator(
+  {
+    [routes.SWITCH_LOGIN]: LoginStack,
+    [routes.SWITCH_APP]: AppStack,
   },
-  [routes.HISTORY]: {
-    screen: History,
+  {
+    initialRouteName: routes.SWITCH_LOGIN,
   },
-});
+);
 
-export default createAppContainer(Navigator);
+export default createAppContainer(switchNavigator);
