@@ -1,4 +1,7 @@
+import axios from 'axios';
 import * as types from './types';
+
+import { BASE_URL, API_KEY } from '../../common/constants';
 
 export const fetchingRestaurantsRequest = () => ({
   type: types.FETCHING_RESTAURANTS_REQUEST,
@@ -14,15 +17,42 @@ export const fetchingRestaurantsFailure = err => ({
   payload: err,
 });
 
-export const fetchingRestaurants = city => {
+export const fetchingCityCode = (city = 'Florida') => {
   return async dispatch => {
     dispatch(fetchingRestaurantsRequest());
     try {
-      const response = await fetch(`url/${city}`);
-      const { results } = await response.json();
-      dispatch(fetchingRestaurantsSuccess(results));
+      const {
+        // eslint-disable-next-line camelcase
+        data: { location_suggestions },
+      } = await axios(`${BASE_URL}/cities?q=${city}`, {
+        headers: {
+          'user-key': API_KEY,
+        },
+      });
+
+      const cityCode = location_suggestions[0].id;
+      const restaurants = await fetchingRestaurants(cityCode);
+
+      dispatch(fetchingRestaurantsSuccess(restaurants));
     } catch (err) {
       dispatch(fetchingRestaurantsFailure(err));
     }
   };
+};
+
+const fetchingRestaurants = async cityCode => {
+  try {
+    const {
+      data: { cuisines },
+    } = await axios(`${BASE_URL}/cuisines?city_id=${cityCode}`, {
+      headers: {
+        'user-key': API_KEY,
+      },
+    });
+    return cuisines;
+  } catch (err) {
+    // eslint-disable-next-line no-console
+    console.log(err);
+    return [];
+  }
 };

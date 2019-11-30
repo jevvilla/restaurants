@@ -15,7 +15,7 @@ const restaurantReducer = (state = INITIAL_STATE, action) => {
       return { ...state, isFetching: false, error: action.payload };
 
     case types.FETCHING_RESTAURANTS_SUCCESS:
-      return { ...state, isFetching: false, users: action.payload };
+      return { ...state, isFetching: false, restaurants: action.payload };
 
     default:
       return state;
